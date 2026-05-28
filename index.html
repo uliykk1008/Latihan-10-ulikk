@@ -567,21 +567,28 @@ void main() {
 // NIM   : 251410008
 // Kelas : SI2A
 
-abstract class AnimalFactory {
+class AnimalFactory {
+
   String nama;
   int umur;
 
   AnimalFactory(this.nama, this.umur);
 
-  void suara();
+  void suara() {
+    print('$nama bersuara');
+  }
 
-  // cache object animal
+  // cache object
   static final Map<String, AnimalFactory> _animalCache = {};
 
   // factory constructor
-  factory AnimalFactory(String type, String nama, int umur) {
+  factory AnimalFactory.create(
+      String type,
+      String nama,
+      int umur,
+      ) {
 
-    // validasi input
+    // validasi
     if (nama.isEmpty) {
       throw ArgumentError('Nama hewan tidak boleh kosong');
     }
@@ -627,7 +634,8 @@ abstract class AnimalFactory {
 
 class Cat extends AnimalFactory {
 
-  Cat(String nama, int umur) : super(nama, umur);
+  Cat(String nama, int umur)
+      : super(nama, umur);
 
   @override
   void suara() {
@@ -637,7 +645,8 @@ class Cat extends AnimalFactory {
 
 class Dog extends AnimalFactory {
 
-  Dog(String nama, int umur) : super(nama, umur);
+  Dog(String nama, int umur)
+      : super(nama, umur);
 
   @override
   void suara() {
@@ -647,7 +656,8 @@ class Dog extends AnimalFactory {
 
 class Bird extends AnimalFactory {
 
-  Bird(String nama, int umur) : super(nama, umur);
+  Bird(String nama, int umur)
+      : super(nama, umur);
 
   @override
   void suara() {
@@ -657,8 +667,17 @@ class Bird extends AnimalFactory {
 
 void main() {
 
-  var hewan1 = AnimalFactory('cat', 'Oyen', 2);
-  var hewan2 = AnimalFactory('cat', 'Oyen', 2);
+  var hewan1 = AnimalFactory.create(
+      'cat',
+      'Oyen',
+      2
+  );
+
+  var hewan2 = AnimalFactory.create(
+      'cat',
+      'Oyen',
+      2
+  );
 
   hewan1.suara();
 
